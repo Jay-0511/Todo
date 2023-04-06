@@ -3,10 +3,10 @@ import TotalTask from './components/totalTask';
 import TodoList from './components/todoList';
 import './App.css';
 import { useEffect, useState } from 'react';
-
 function App() {
   let [appendNode, setappendNode] = useState([]);
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(()=>{
     const fetchdata = JSON.parse(localStorage.getItem('todo'));
     appendNode = fetchdata ? fetchdata : [];
