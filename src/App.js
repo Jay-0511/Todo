@@ -7,10 +7,15 @@ function App() {
   let [appendNode, setappendNode] = useState([]);
   useEffect(()=>{
     const fetchdata = JSON.parse(localStorage.getItem('todo'));
-    // appendNode = fetchdata ? fetchdata : [];
     console.log("Fetch data ",fetchdata);
-    setappendNode(fetchdata);
+    setappendNode(appendNode = fetchdata ? fetchdata : []);
+    console.log(appendNode, 'onerer');
   },[]);
+
+  useEffect(()=>{
+    console.log("Append Node ",appendNode);
+    addIntoLocal(appendNode);
+  },[appendNode])
   
   const addNode = (text)=>{
     setappendNode([...appendNode,{
@@ -38,6 +43,10 @@ function App() {
     const lists = [...appendNode];
     lists[nodeIndex].text = text;
     setappendNode(lists);
+  }
+  const addIntoLocal = (appendnode)=>{
+    console.log("addedinto local");
+    localStorage.setItem("todo",JSON.stringify(appendnode));
   }
   return (
     <div className="container">
