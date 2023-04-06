@@ -4,7 +4,7 @@ const TodoList = (props) =>{
     const addIntoLocal = (appendnode)=>{
         localStorage.setItem("todo",JSON.stringify(appendnode));
     }
-    if(props.data == 0){
+    if(props.data === 0){
             return(
             <>
                 <div className="empty-list" id="empty">

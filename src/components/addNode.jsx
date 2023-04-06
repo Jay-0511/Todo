@@ -4,7 +4,7 @@ const AddNode = (props)=>{
     let text = "";
      const checkTxt= () =>{
          text = document.getElementById("text").value.trim();
-         if(text!= ""){
+         if(text!== ""){
              props.addNode(text);
             document.getElementById("text").value = "";
          }
