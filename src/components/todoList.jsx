@@ -8,7 +8,7 @@ const TodoList = (props) =>{
             return(
             <>
                 <div className="empty-list" id="empty">
-                    <img src={clipboardimg} alt="Clipboard image"/>
+                    <img src={clipboardimg} alt="Clipboard"/>
                     <p>Your todo list is empty</p>
                 </div>
             </>
