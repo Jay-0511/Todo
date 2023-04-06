@@ -1,27 +1,26 @@
+import { useRef } from 'react';
 import logo from '../images/logo.png';
 import plus from '../images/plus-icon.png';
 const AddNode = (props)=>{
-    let text = "";
+    let text = useRef();
      const checkTxt= () =>{
-         text = document.getElementById("text").value.trim();
-         if(text!== ""){
-             props.addNode(text);
-            document.getElementById("text").value = "";
+         if(text.current.value !== ""){
+            props.addNode(text.current.value);
+            text.current.value = "";
          }
          else{
-             document.getElementById("text").classList.add('redborder');
-             document.getElementById("text").value = text.trim();
+            text.current.className= "text redborder";
+            text.current.value = text.current.value.trim();
              alert("Please enter something in text..");
          }
      }
-    
     return(
         <>
             <div className="logo">
                 <img src={logo} alt="logo"/>
             </div>
             <div className="list">
-                <input type="text" id="text" className="text" placeholder="Let's do according to todoooo..."/>
+                <input type="text" id="text" className="text" placeholder="Let's do according to todoooo..." ref={text}/>
                 <button id="addbtn" onClick={checkTxt} className="addbtn"><span>Add</span> <img src={plus} alt="plus icon"/></button>
             </div>
         </>

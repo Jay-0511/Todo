@@ -8,8 +8,10 @@ function App() {
   useEffect(()=>{
     const fetchdata = JSON.parse(localStorage.getItem('todo'));
     // appendNode = fetchdata ? fetchdata : [];
-    setappendNode(fetchdata || []);
-  },[])
+    console.log("Fetch data ",fetchdata);
+    setappendNode(fetchdata);
+  },[]);
+  
   const addNode = (text)=>{
     setappendNode([...appendNode,{
         id : Date.now(),
