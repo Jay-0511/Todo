@@ -1,14 +1,9 @@
 import logo from '../images/logo.png';
 import plus from '../images/plus-icon.png';
 const AddNode = (props)=>{
-    // let add = document.getElementById("addbtn");
     let text = "";
-
-    // let count = props.count;
-   
      const checkTxt= () =>{
          text = document.getElementById("text").value.trim();
-        //  console.log("text is ",text);
          if(text!= ""){
              props.addNode(text);
             document.getElementById("text").value = "";
