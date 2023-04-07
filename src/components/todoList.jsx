@@ -1,8 +1,6 @@
 import clipboardimg from '../images/Clipboard.png';
 import Showlist from './showList';
 const TodoList = (props) =>{
-    console.log(props);
-   
     if(props.data.length === 0){
             return(
             <>
@@ -13,7 +11,7 @@ const TodoList = (props) =>{
             </>
         )
     }
-    console.log("Props.data",props.data);
+    
     
     return(
         <div className="todo-list" id="todo-list">
