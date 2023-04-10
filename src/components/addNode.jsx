@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import logo from '../images/logo.png';
-import plus from '../images/plus-icon.png';
+import logo from '../assets/images/logo.png';
+import plus from '../assets/images/plus-icon.png';
 const AddNode = ({crudOperation})=>{
     const [textInput,settextInput] = useState("");
     const inputHandler = (e) =>{

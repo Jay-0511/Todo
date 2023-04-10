@@ -1,4 +1,4 @@
-import clipboardimg from '../images/Clipboard.png';
+import clipboardimg from '../assets/images/Clipboard.png';
 import Showlist from './showList';
 const TodoList = ({data,crudOperation}) =>{
     console.log("data is ",data);
