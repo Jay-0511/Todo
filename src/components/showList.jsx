@@ -1,39 +1,44 @@
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
-const Showlist = (props) =>{
+const Showlist = ({data,crudOperation}) =>{
+    
     const editableDiv = useRef();
+    const [disable,setDisable] = useState(true);
+
+    const Blur = () =>{
+        if(editableDiv.current.value){
+            setDisable(true);
+            editableDiv.current.className = "noline";
+            crudOperation(data.id,'edit',editableDiv.current.value);
+        }
+        else{
+            editableDiv.current.focus();
+            editableDiv.current.className = "noline redborder"
+        }
+    }
     const editEnable=()=>{
-        editableDiv.current.disabled = false;
+        setDisable(false);
+        console.log("Disable is ",disable);
         editableDiv.current.focus();
-        editableDiv.current.addEventListener('focusout',()=>{
-            editableDiv.current.disabled = true;
-            props.editNode(props.myId,editableDiv.current.value);
-        })
     }
     return(
         <>
-        <div className="todo" id="nodeid" data-id={props.key}> 
+        <div className="todo" id="nodeid" > 
             <div className="textcontainer">
-                {props.stat ? 
+                {data.stat ? 
                 <> 
-                    <i className="fa fa-check" aria-hidden="true" onClick={() =>{props.checkBox(props.myId)}}></i> 
-                    <div className="line">{props.text}</div>
+                    <i className="fa fa-check" aria-hidden="true" onClick={() =>{crudOperation(data.id,'check')}}></i> 
+                    <div className="line">{data.text}</div>
                 </> : 
                 <> 
-                    <input type="checkBox" id="checkBox" className="checkbox" onClick={() =>{props.checkBox(props.myId)}} /> 
-                    <input type="text" className="noline" ref={editableDiv} defaultValue={props.text} disabled/>
+                    <input type="checkBox" id="checkBox" className="checkbox" onChange={() =>{crudOperation(data.id,'check')}} /> 
+                    <input type="text" className="noline" ref={editableDiv} defaultValue={data.text} onBlur={Blur} disabled={disable}/>
                 </>
                 }
             </div>
             <div className="icons">
-                {props.stat ?
-                <>
-                    <i id="editNode" className="fas fa-edit not-allowed"></i> <i id="deleteNode" className="fas fa-trash-alt" onClick={()=>{props.deleteNode(props.myId)}}></i>
-                </>:
-                <>
-                    <i id="editNode" className="fas fa-edit" onClick={editEnable}></i> <i id="deleteNode" className="fas fa-trash-alt" onClick={()=>{props.deleteNode(props.myId)}}></i>
-                </> 
-                }
+                <i id="editNode" className={data.stat ? 'fas fa-edit not-allowed' : 'fas fa-edit'}  onClick={data.stat ? ()=>{} : editEnable}></i> 
+                <i id="deleteNode" className="fas fa-trash-alt" onClick={()=>{crudOperation(data.id,'delete')}}></i>
             </div>
         </div>
          </>

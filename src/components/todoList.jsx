@@ -1,22 +1,23 @@
 import clipboardimg from '../images/Clipboard.png';
 import Showlist from './showList';
-const TodoList = (props) =>{
-    if(props.data.length === 0){
-            return(
-            <>
+const TodoList = ({data,crudOperation}) =>{
+    console.log("data is ",data);
+    return(
+        <>
+            <div className="total">
+                <h3 className="task">Total Task <span className="total_num"  id="task">{data.length}</span></h3>
+                <h3 className="completed">Completed <span className="total_num"> <span id="outof">{data.filter((node) => node.stat === true).length}</span> out of <span id="task1">{data.length}</span></span></h3>
+            </div>
+            {data.length === 0 && 
                 <div className="empty-list" id="empty">
                     <img src={clipboardimg} alt="Clipboard"/>
                     <p>Your todo list is empty</p>
                 </div>
-            </>
-        )
-    }
-    
-    
-    return(
-        <div className="todo-list" id="todo-list">
-            {props.data.map((data)=> <Showlist myId={data.id} key={data.id} text={data.text} stat={data.stat} checkBox={props.checkBox} deleteNode={props.deleteNode} editNode={props.editNode}/>)}
-        </div>
+            }
+            <div className="todo-list" id="todo-list">
+                {data.map((data)=> <Showlist data={data} key={data.id} crudOperation = {crudOperation}/>)}
+            </div>
+        </>
     )
 }
 export default TodoList;

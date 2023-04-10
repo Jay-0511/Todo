@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import AddNode from './components/addNode';
-import TotalTask from './components/totalTask';
 import TodoList from './components/todoList';
 import './App.css';
-import { useEffect, useState } from 'react';
+
 function App() {
   let [appendNode, setappendNode] = useState([]);
   
@@ -16,39 +16,34 @@ function App() {
     console.log("Append Node ",appendNode);
     localStorage.setItem("todo",JSON.stringify(appendNode));
   },[appendNode])
-  
-  const addNode = (text)=>{
-    setappendNode([...appendNode,{
-        id : Date.now(),
-        stat : false,
-        text : text
-    }])
-  }
-  const checkBox = (id)=>{
-    const nodeIndex = appendNode.findIndex((node)=>node.id === id)
-    const lists = [...appendNode];
-    lists[nodeIndex].stat = !lists[nodeIndex].stat;
-    setappendNode(lists);
-  }
 
-  const deleteNode = (id) =>{
+  const crudOperation = (id,ch,text) =>{
     const nodeIndex = appendNode.findIndex((node)=>node.id === id)
     const lists = [...appendNode];
-    lists.splice(nodeIndex,1);
-    setappendNode(lists);
-  }
-
-  const editNode = (id,text) =>{
-    const nodeIndex = appendNode.findIndex((node)=>node.id === id)
-    const lists = [...appendNode];
-    lists[nodeIndex].text = text;
-    setappendNode(lists);
+    switch(ch){
+      case 'add' : setappendNode([...appendNode,{
+                    id : Date.now(),
+                    stat : false,
+                    text : text
+                  }])
+                  break;
+      case 'check' : lists[nodeIndex].stat = !lists[nodeIndex].stat;
+                      setappendNode(lists);
+                      break;
+      case 'delete' : lists.splice(nodeIndex,1);
+                      setappendNode(lists);
+                      break;
+      case 'edit' : lists[nodeIndex].text = text;
+                      setappendNode(lists);                  
+                      break;
+      default : alert('Something went wrong');
+                      break;
+    }
   }
   return (
     <div className="container">
-      <AddNode addNode = {addNode} />
-      <TotalTask appendNode={appendNode}/>
-      <TodoList data = {appendNode ? appendNode : 0} checkBox = {checkBox} deleteNode = {deleteNode} editNode = {editNode}/>
+      <AddNode crudOperation = {crudOperation}/>
+      <TodoList data = {appendNode} crudOperation = {crudOperation}/>
     </div>
   );
 }

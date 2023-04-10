@@ -1,19 +1,19 @@
 import { useState } from 'react';
 import logo from '../images/logo.png';
 import plus from '../images/plus-icon.png';
-const AddNode = (props)=>{
+const AddNode = ({crudOperation})=>{
     const [textInput,settextInput] = useState("");
     const inputHandler = (e) =>{
         settextInput(e.target.value)
     }
      const checkTxt= () =>{
-        if(textInput){
-            props.addNode(textInput);
-            settextInput("");
+        if(textInput.trim()){
+            crudOperation(0,'add',textInput);
         }
         else{
             alert("Please enter something in text..");
         }
+        settextInput("");
      }
     return(
         <>
