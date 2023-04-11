@@ -183,7 +183,15 @@ body{
   text-decoration: line-through;
   color: var(--grey-300);
   word-break: break-all;
+  background: transparent;
+  font-size: 16px;
+  border: none;
+  width: 100%;
 }
+/* .line:focus{
+  border: none;
+  outline: none;
+} */
 .noline{
   word-break: break-all;
   display: inline-block;

@@ -1,7 +1,12 @@
+import { useState } from "react"
 import clipboardimg from '../assets/images/Clipboard.png';
 import Showlist from './showList';
 const TodoList = ({data,crudOperation}) =>{
     console.log("data is ",data);
+    const [disable,setDisable] = useState(true);
+    const setDisableMethod = () =>{
+        setDisable(!disable);
+    }
     return(
         <>
             <div className="total">
@@ -15,7 +20,7 @@ const TodoList = ({data,crudOperation}) =>{
                 </div>
             }
             <div className="todo-list" id="todo-list">
-                {data.map((data)=> <Showlist data={data} key={data.id} crudOperation = {crudOperation}/>)}
+                {data.map((data)=> <Showlist data={data} key={data.id} crudOperation = {crudOperation} setDisableMethod ={setDisableMethod}/>)}
             </div>
         </>
     )
