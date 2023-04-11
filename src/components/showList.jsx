@@ -1,8 +1,8 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 const Showlist = ({data,crudOperation}) =>{
     console.log(data.stat);
     const editableDiv = useRef();
-    const [disable,setDisable] = useState(data.stat);
+    const [disable,setDisable] = useState(true);
 
     const Blur = () =>{
         setDisable(true);
@@ -15,8 +15,16 @@ const Showlist = ({data,crudOperation}) =>{
             editableDiv.current.className = "noline redborder"
         }
     }
+
+    useEffect(() => {
+        if(!disable) {
+            editableDiv.current.focus();
+        }else {
+            editableDiv.current.blur();
+        }
+    }, [disable])
+
     const editEnable=()=>{
-        editableDiv.current.focus();
         setDisable(false);
     }
     return(
